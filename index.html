@@ -77,7 +77,7 @@ h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;margin-bottom:24px}
 .cat{margin-bottom:36px}
 .cat h3{font-size:1.25rem;margin-bottom:6px}
 .cat p{margin:0 0 14px;color:var(--muted)}
-.frames{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.frames{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .frames.wide{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .frame{aspect-ratio:9/16;border:2px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.92rem;padding:12px;background:var(--surface)}
 .wide .frame{aspect-ratio:16/9}
@@ -96,6 +96,14 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px sol
 h2.pop,p.pop,.lead.pop{transform-origin:left center}
 @media(prefers-reduced-motion:reduce){.pop{animation:none}}
 #contact h2{text-align:center;font-weight:800;font-size:clamp(2rem,5vw,3rem);margin-bottom:32px}
+.item{display:grid;gap:8px;align-content:start}
+.frame.ig{aspect-ratio:9/18}
+.facade{position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:#111 center/cover no-repeat;color:#fff;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;font:500 .9rem var(--body)}
+.facade .play{width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:1.2rem;padding-left:4px}
+.facade .lbl{text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.igcard{background:linear-gradient(135deg,#515BD4,#8134AF,#DD2A7B,#F58529)}
+.item a.src{font-size:.9rem;color:var(--muted);text-decoration:none}
+.item a.src:hover{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -207,30 +215,44 @@ h2.pop,p.pop,.lead.pop{transform-origin:left center}
 <footer><div class="wrap">© 2026 Kamal Kumar. Video editor and graphic designer.</div></footer>
 
 <script>
-/* Add videos here later. type: "youtube" (id), "file" (url) ; ratio: "wide" or "tall" */
+/* To add a video: push {t:"yt"|"ig", id:"VIDEO_ID", short:true(optional)} into items */
 var categories=[
- {title:"Reels and Shorts",note:"Short-form edits for brands and creators.",ratio:"tall",slots:4,items:[]},
- {title:"Podcast edits",note:"Long-form episodes, including The Chai Daily.",ratio:"wide",slots:2,items:[]},
- {title:"Brand and promo videos",note:"Promotional films and motion graphics.",ratio:"wide",slots:2,items:[]}
+ {title:"Reels and Shorts",note:"Short-form edits for brands and creators.",ratio:"tall",items:[
+  {t:"yt",id:"9CD-zoDtI_4",short:true},{t:"yt",id:"4eic0i9t-F8",short:true},
+  {t:"ig",id:"DgFUZBsxat7"},{t:"ig",id:"DW3E8KQDI3n"},{t:"ig",id:"DYZvD8eT0NV"},{t:"ig",id:"DflxpQNzjYJ"}]},
+ {title:"Podcast edits",note:"Long-form podcast episodes.",ratio:"wide",items:[
+  {t:"yt",id:"lDcb4kaYtp4"},{t:"yt",id:"KJ2lQB1knjQ"},{t:"yt",id:"LyTNjY_FxYM"},{t:"yt",id:"p_qKWUND4no"}]},
+ {title:"Brand and promo videos",note:"Promotional films and brand content.",ratio:"tall",items:[
+  {t:"ig",id:"De89xEWB3W3"},{t:"ig",id:"DewgrhcTkrW"},{t:"ig",id:"DeHPkhSNlaT"},
+  {t:"ig",id:"DdZOU98KfNY"},{t:"ig",id:"De9VyVsDx11"},{t:"ig",id:"DeRkDIIE4q5"}]}
 ];
+function embedSrc(v){return v.t==="yt"?"https://www.youtube.com/embed/"+v.id+"?autoplay=1&rel=0&playsinline=1":"https://www.instagram.com/reel/"+v.id+"/embed/";}
+function openUrl(v){return v.t==="yt"?(v.short?"https://www.youtube.com/shorts/"+v.id:"https://www.youtube.com/watch?v="+v.id):"https://www.instagram.com/reel/"+v.id+"/";}
 var root=document.getElementById("work-list");
 categories.forEach(function(c){
  var box=document.createElement("div");box.className="cat";
  var h=document.createElement("h3");h.textContent=c.title;
  var p=document.createElement("p");p.textContent=c.note;
  var grid=document.createElement("div");grid.className="frames"+(c.ratio==="wide"?" wide":"");
- c.items.forEach(function(v){
-  var f=document.createElement("div");f.className="frame filled";
-  if(v.type==="youtube"){var i=document.createElement("iframe");i.src="https://www.youtube.com/embed/"+v.id;i.loading="lazy";i.title=v.title||c.title;i.allowFullscreen=true;f.appendChild(i);}
-  else{var m=document.createElement("video");m.src=v.url;m.controls=true;m.preload="metadata";f.appendChild(m);}
-  grid.appendChild(f);
+ c.items.forEach(function(v,n){
+  var item=document.createElement("div");item.className="item";
+  var f=document.createElement("div");f.className="frame filled"+(v.t==="ig"?" ig":"");
+  var b=document.createElement("button");b.type="button";b.className="facade"+(v.t==="ig"?" igcard":"");
+  b.setAttribute("aria-label","Play "+c.title+" video "+(n+1));
+  if(v.t==="yt"){b.style.backgroundImage="url(https://i.ytimg.com/vi/"+v.id+"/hqdefault.jpg)";}
+  b.innerHTML='<span class="play" aria-hidden="true">&#9654;</span><span class="lbl">'+(v.t==="ig"?"Instagram Reel":"Play video")+'</span>';
+  b.addEventListener("click",function(){
+   var i=document.createElement("iframe");i.src=embedSrc(v);i.title=c.title+" video "+(n+1);
+   i.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";i.allowFullscreen=true;
+   f.innerHTML="";f.appendChild(i);
+  });
+  f.appendChild(b);
+  var a=document.createElement("a");a.className="src";a.href=openUrl(v);a.target="_blank";a.rel="noopener";
+  a.textContent="Watch on "+(v.t==="yt"?"YouTube":"Instagram")+" \u2197";
+  item.appendChild(f);item.appendChild(a);grid.appendChild(item);
  });
- for(var n=c.items.length;n<c.slots;n++){
-  var e=document.createElement("div");e.className="frame";e.textContent="Video coming soon";grid.appendChild(e);
- }
  box.appendChild(h);box.appendChild(p);box.appendChild(grid);root.appendChild(box);
 });
-
 document.addEventListener("click",function(e){
  var t=e.target.closest(".fact,.skill,.job,.row,.cat,.chip,.frame,.btn,.lead,.about p,h1,h2,.tl");
  if(!t)return;
