@@ -101,7 +101,11 @@ h2.pop,p.pop,.lead.pop{transform-origin:left center}
 .facade{position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:#111 center/cover no-repeat;color:#fff;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;font:500 .9rem var(--body)}
 .facade .play{width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:1.2rem;padding-left:4px}
 .facade .lbl{text-shadow:0 1px 4px rgba(0,0,0,.6)}
-.igcard{background:linear-gradient(135deg,#515BD4,#8134AF,#DD2A7B,#F58529)}
+.igcard{position:absolute;background:radial-gradient(circle at 25% 15%,rgba(255,255,255,.28),transparent 45%),linear-gradient(160deg,#515BD4,#8134AF 35%,#DD2A7B 70%,#F58529)}
+.igcard::after{content:"";position:absolute;inset:12px;border:2px solid rgba(255,255,255,.4);border-radius:10px;pointer-events:none}
+.igtag{letter-spacing:.3em;font-size:.75rem;font-weight:500;margin-bottom:-6px}
+.igbig{font:800 clamp(2.6rem,6vw,3.4rem)/1 var(--display);letter-spacing:-.02em;margin-bottom:10px}
+.igcard .play{background:#fff;color:#8134AF}
 .item a.src{font-size:.9rem;color:var(--muted);text-decoration:none}
 .item a.src:hover{color:var(--ink)}
 </style>
@@ -171,7 +175,7 @@ h2.pop,p.pop,.lead.pop{transform-origin:left center}
 <h3>Video Editor</h3>
 <div class="meta">Kara MarCom Pvt. Ltd., June to November 2026, Gurugram</div>
 <ul>
-<li>Edited long-form podcast episodes for The Chai Daily YouTube channel.</li>
+<li>Edited long-form content.</li>
 <li>Made short-form videos, Reels and promotional content for brands.</li>
 <li>Improved storytelling, pacing, transitions, sound design and visual enhancements.</li>
 <li>Worked with the team to deliver engaging content with a clear audience focus.</li>
@@ -240,7 +244,7 @@ categories.forEach(function(c){
   var b=document.createElement("button");b.type="button";b.className="facade"+(v.t==="ig"?" igcard":"");
   b.setAttribute("aria-label","Play "+c.title+" video "+(n+1));
   if(v.t==="yt"){b.style.backgroundImage="url(https://i.ytimg.com/vi/"+v.id+"/hqdefault.jpg)";}
-  b.innerHTML='<span class="play" aria-hidden="true">&#9654;</span><span class="lbl">'+(v.t==="ig"?"Instagram Reel":"Play video")+'</span>';
+  b.innerHTML=v.t==="ig"?'<span class="igtag">INSTAGRAM</span><span class="igbig">REEL</span><span class="play" aria-hidden="true">&#9654;</span><span class="lbl">Tap to play</span>':'<span class="play" aria-hidden="true">&#9654;</span><span class="lbl">Play video</span>';
   b.addEventListener("click",function(){
    var i=document.createElement("iframe");i.src=embedSrc(v);i.title=c.title+" video "+(n+1);
    i.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";i.allowFullscreen=true;
