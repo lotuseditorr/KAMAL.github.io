@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kamal Kumar – Video Editor</title>
+<meta name="description" content="Kamal Kumar is a video editor and graphic designer. Reels, podcasts, YouTube and brand videos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#E8ECF1;--surface:#F6F8FA;--ink:#17202E;--muted:#55627A;--line:#C5CEDB;--accent:#2B55F5;--accent-ink:#fff;--mark:#F2A516;
+--display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141A26;--surface:#1D2536;--ink:#E8ECF4;--muted:#9AA7BF;--line:#303B52;--accent:#6F90FF;--accent-ink:#0E1424;--mark:#F7B93E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141A26;--surface:#1D2536;--ink:#E8ECF4;--muted:#9AA7BF;--line:#303B52;--accent:#6F90FF;--accent-ink:#0E1424;--mark:#F7B93E;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font:800 1.15rem var(--display);text-decoration:none;letter-spacing:-.01em}
+.nav nav{display:flex;gap:18px;font-size:.95rem}
+.nav nav a{text-decoration:none;color:var(--muted)}
+.nav nav a:hover{color:var(--ink)}
+@media(max-width:520px){.nav nav a:nth-child(n+4){display:none}}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em}
+.hero{padding:56px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}.photo{order:-1;width:140px!important}}
+h1{font-size:clamp(2.4rem,6.4vw,4.4rem);font-weight:800;max-width:14ch}
+.lead{max-width:52ch;color:var(--muted);margin:20px 0 28px;font-size:1.15rem}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translateY(-1px)}
+.photo{width:220px;aspect-ratio:265/310;border-radius:18px;object-fit:cover;background:#fff;border:2px solid var(--ink);display:block}
+/* timeline strip */
+.tl{margin-top:48px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 16px;overflow:hidden;position:relative}
+.ruler{display:flex;justify-content:space-between;font:500 .72rem var(--body);color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.track{display:flex;gap:4px;height:26px;margin-bottom:6px;align-items:center}
+.track b{font:500 .7rem var(--body);color:var(--muted);width:24px;flex:none}
+.clip{height:100%;border-radius:4px;font:500 .72rem/26px var(--body);padding:0 8px;white-space:nowrap;overflow:hidden;color:#fff}
+.v{background:var(--accent)}.a{background:#3F8F7A}.g{background:#7B5CD6}
+.dark .clip{color:#0E1424}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--mark);left:12%;animation:scrub 9s ease-in-out 1 forwards}
+.playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:10px solid var(--mark);border-bottom:0}
+@keyframes scrub{from{left:6%}to{left:72%}}
+@media(prefers-reduced-motion:reduce){.playhead{animation:none;left:72%}.btn:hover{transform:none}}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;margin-bottom:24px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.about p{margin:0 0 16px;max-width:60ch}
+.facts{display:grid;gap:14px;align-content:start}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.fact span{display:block;color:var(--muted);font-size:.9rem}
+.fact strong{font:700 1.15rem var(--display)}
+.jobs{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--line)}
+.job{position:relative;padding:0 0 36px 8px}
+.job::before{content:"";position:absolute;left:-30px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job.now::before{background:var(--mark);border-color:var(--mark)}
+.job h3{font-size:1.35rem}
+.job .meta{color:var(--muted);font-size:.95rem;margin:4px 0 10px}
+.job ul{margin:0;padding-left:18px;max-width:64ch}
+.job li{margin-bottom:6px}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.skills{grid-template-columns:1fr}}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.skill h3{font-size:1.2rem;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.92rem;background:var(--bg)}
+/* work */
+.cat{margin-bottom:36px}
+.cat h3{font-size:1.25rem;margin-bottom:6px}
+.cat p{margin:0 0 14px;color:var(--muted)}
+.frames{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.frames.wide{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.frame{aspect-ratio:9/16;border:2px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.92rem;padding:12px;background:var(--surface)}
+.wide .frame{aspect-ratio:16/9}
+.frame.filled{border:0;padding:0;overflow:hidden;position:relative;background:#000}
+.frame iframe,.frame video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:760px){.contact{grid-template-columns:1fr}}
+.rows{display:grid;gap:12px}
+.row{display:flex;justify-content:space-between;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none}
+.row span{color:var(--muted)}
+.row:hover{border-color:var(--accent)}
+footer{padding:28px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+@keyframes pop{0%{transform:scale(1);box-shadow:0 0 0 0 var(--mark)}35%{transform:scale(1.07);box-shadow:0 0 0 6px color-mix(in srgb,var(--mark) 45%,transparent)}100%{transform:scale(1);box-shadow:0 0 0 0 transparent}}
+.pop{animation:pop .55s cubic-bezier(.3,1.5,.5,1)}
+h2.pop,p.pop,.lead.pop{transform-origin:left center}
+@media(prefers-reduced-motion:reduce){.pop{animation:none}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="logo" href="#top">Kamal Kumar</a>
+<nav aria-label="Main"><a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="wrap">
+<div class="hero">
+<div class="hero-grid">
+<div>
+<h1>Raw footage in. Stories people finish watching out.</h1>
+<p class="lead">I’m Kamal, a video editor and graphic designer in Bareilly with over 5 years of experience. I edit reels, podcasts, YouTube videos and brand films for creators and companies.</p>
+<div class="btns">
+<a class="btn primary" href="https://wa.me/919719935112?text=Hi%20Kamal%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20hire%20you." target="_blank" rel="noopener">Hire me on WhatsApp</a>
+<a class="btn" href="mailto:lotuseditorr@gmail.com?subject=Hire%20Kamal%20for%20a%20video%20project" target="_blank" rel="noopener">Send me an email</a>
+</div>
+</div>
+
+</div>
+<div class="tl" aria-hidden="true">
+<div class="ruler"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span></div>
+<div class="track"><b>V1</b><span class="clip v" style="width:22%">Hook</span><span class="clip v" style="width:34%">Story</span><span class="clip v" style="width:26%">Motion graphics</span><span class="clip v" style="width:12%">CTA</span></div>
+<div class="track"><b>V2</b><span class="clip g" style="margin-left:22%;width:20%">Subtitles</span><span class="clip g" style="width:30%">Colour grade</span></div>
+<div class="track"><b>A1</b><span class="clip a" style="width:60%">Voice clean-up</span><span class="clip a" style="width:36%">Music + sound design</span></div>
+<span class="playhead"></span>
+</div>
+</div>
+</div>
+
+<section id="about"><div class="wrap">
+<h2>About</h2>
+<div class="about">
+<div>
+<p>I’m a results-driven video editor who turns raw footage into clear, compelling visual stories for brands, creators and organizations.</p>
+<p>My focus is clean, professional edits, strong storytelling and pacing, attention to detail, and on-time delivery with consistent quality.</p>
+<p>I’m open to freelance projects, collaborations and full-time roles where creativity, quality and impact matter.</p>
+</div>
+<div class="facts">
+<div class="fact"><span>Experience</span><strong>5+ years editing since March 2021</strong></div>
+<div class="fact"><span>Based in</span><strong>Bareilly, Uttar Pradesh, India</strong></div>
+<div class="fact"><span>Availability</span><strong>Freelance, remote or hybrid</strong></div>
+</div>
+</div>
+</div></section>
+<section id="work"><div class="wrap">
+<h2>Selected work</h2>
+<div id="work-list"></div>
+</div></section>
+<section id="experience"><div class="wrap">
+<h2>Experience</h2>
+<ul class="jobs">
+<li class="job now">
+<h3>Freelance Video Editor</h3>
+<div class="meta">Self-employed, November 2026 to present, Remote</div>
+<ul>
+<li>Create video content for clients across niches: Instagram Reels, YouTube Shorts and long-form videos.</li>
+<li>Edit with smooth transitions, sound design, subtitles, visual effects and motion graphics.</li>
+<li>Manage projects from raw footage to final delivery, on quality and on deadline.</li>
+</ul>
+</li>
+<li class="job">
+<h3>Video Editor</h3>
+<div class="meta">Kara MarCom Pvt. Ltd., June to November 2026, Gurugram</div>
+<ul>
+<li>Edited long-form podcast episodes for The Chai Daily YouTube channel.</li>
+<li>Made short-form videos, Reels and promotional content for brands.</li>
+<li>Improved storytelling, pacing, transitions, sound design and visual enhancements.</li>
+<li>Worked with the team to deliver engaging content with a clear audience focus.</li>
+</ul>
+</li>
+<li class="job">
+<h3>Freelance Video Editor</h3>
+<div class="meta">Self-employed, March 2021 to June 2026, Remote</div>
+<ul>
+<li>Produced social media videos, promos, YouTube videos and brand campaigns across industries.</li>
+<li>Used Premiere Pro and After Effects for editing, motion graphics and visual effects.</li>
+<li>Delivered clean edits with attention to detail and reliable turnaround.</li>
+</ul>
+</li>
+</ul>
+</div></section>
+<section id="skills"><div class="wrap">
+<h2>Skills and tools</h2>
+<div class="skills">
+<div class="skill"><h3>Software</h3><div class="chips"><span class="chip">Adobe Premiere Pro</span><span class="chip">Adobe After Effects</span><span class="chip">Adobe Photoshop</span></div></div>
+<div class="skill"><h3>Editing</h3><div class="chips"><span class="chip">Reels and Shorts</span><span class="chip">YouTube long-form</span><span class="chip">Podcast editing</span><span class="chip">Promo and marketing videos</span></div></div>
+<div class="skill"><h3>Creative</h3><div class="chips"><span class="chip">Motion graphics</span><span class="chip">Visual effects</span><span class="chip">Colour grading</span><span class="chip">Sound design</span><span class="chip">Subtitles</span><span class="chip">Graphic design</span><span class="chip">Videography</span></div></div>
+</div>
+</div></section>
+<section id="contact"><div class="wrap">
+<h2>Let’s work together</h2>
+<div class="contact">
+<p style="margin:0;max-width:44ch">Have raw footage or an idea? Send me a message with your video type, length and deadline, and I’ll reply with a plan and a quote.</p>
+<div class="rows">
+<a class="row" href="https://wa.me/919719935112" target="_blank" rel="noopener"><span>WhatsApp</span><strong>+91 97199 35112</strong></a>
+<a class="row" href="mailto:lotuseditorr@gmail.com?subject=Hire%20Kamal%20for%20a%20video%20project" target="_blank" rel="noopener"><span>Email</span><strong>lotuseditorr@gmail.com</strong></a>
+<a class="row" href="https://www.google.com/maps/search/?api=1&amp;query=Bareilly%2C+Uttar+Pradesh" target="_blank" rel="noopener"><span>Location</span><strong>Bareilly, Uttar Pradesh</strong></a>
+</div>
+</div>
+</div></section>
+
+
+
+
+</main>
+
+<footer><div class="wrap">© 2026 Kamal Kumar. Video editor and graphic designer.</div></footer>
+
+<script>
+/* Add videos here later. type: "youtube" (id), "file" (url) ; ratio: "wide" or "tall" */
+var categories=[
+ {title:"Reels and Shorts",note:"Short-form edits for brands and creators.",ratio:"tall",slots:4,items:[]},
+ {title:"Podcast edits",note:"Long-form episodes, including The Chai Daily.",ratio:"wide",slots:2,items:[]},
+ {title:"Brand and promo videos",note:"Promotional films and motion graphics.",ratio:"wide",slots:2,items:[]}
+];
+var root=document.getElementById("work-list");
+categories.forEach(function(c){
+ var box=document.createElement("div");box.className="cat";
+ var h=document.createElement("h3");h.textContent=c.title;
+ var p=document.createElement("p");p.textContent=c.note;
+ var grid=document.createElement("div");grid.className="frames"+(c.ratio==="wide"?" wide":"");
+ c.items.forEach(function(v){
+  var f=document.createElement("div");f.className="frame filled";
+  if(v.type==="youtube"){var i=document.createElement("iframe");i.src="https://www.youtube.com/embed/"+v.id;i.loading="lazy";i.title=v.title||c.title;i.allowFullscreen=true;f.appendChild(i);}
+  else{var m=document.createElement("video");m.src=v.url;m.controls=true;m.preload="metadata";f.appendChild(m);}
+  grid.appendChild(f);
+ });
+ for(var n=c.items.length;n<c.slots;n++){
+  var e=document.createElement("div");e.className="frame";e.textContent="Video coming soon";grid.appendChild(e);
+ }
+ box.appendChild(h);box.appendChild(p);box.appendChild(grid);root.appendChild(box);
+});
+
+document.addEventListener("click",function(e){
+ var t=e.target.closest(".fact,.skill,.job,.row,.cat,.chip,.frame,.btn,.lead,.about p,h1,h2,.tl");
+ if(!t)return;
+ t.classList.remove("pop");void t.offsetWidth;t.classList.add("pop");
+});
+</script>
+</body>
+</html>
